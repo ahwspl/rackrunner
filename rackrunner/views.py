@@ -15,7 +15,7 @@ class RackerView(viewsets.ViewSet):
         path = get_path(rack_ids)
 
         return JsonResponse({
+            "path": path,
             "boundary" : boundary,
-            "racks" : all_racks,
-            "path" : path
+            "racks" : all_racks
         })
