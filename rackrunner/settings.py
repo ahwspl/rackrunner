@@ -25,7 +25,7 @@ SECRET_KEY = '30o+efqr&*s7sq%))@e_4%^$@(f8$98ul1g5uk_f-0s5@k7xjx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['frozen-cove-59828.herokuapp.com']
+ALLOWED_HOSTS = ['frozen-cove-59828.herokuapp.com', '127.0.0.1',]
 
 
 # Application definition
