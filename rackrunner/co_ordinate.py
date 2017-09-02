@@ -21,8 +21,6 @@ def get_boundary():
 def get_path(racks):
     if racks is None or len(racks) == 0:
         return []
-    print(type(racks))
-    print(racks)
     flatmap_of_list = (dsa.flatmap(thea2.get_neighbors, thea2.locations))
     flatmap_of_list = [dict(zip(('x', 'y'), (i.x, i.y))) for i in flatmap_of_list]
     map_location = [i.label for i in thea2.locations]
@@ -39,5 +37,11 @@ def get_path(racks):
             result.append(temp)
         else:
             result.append({"x": point.x, "y": point.y, "isPickUp": False})
+
+
+    del result[0]
+    del result[-1]
+    start_point = {"x": 0, "y": 1, "isPickUp": False}
+    result = [start_point] +result + [start_point]
 
     return result
