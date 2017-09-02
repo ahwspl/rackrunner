@@ -29,11 +29,14 @@ def get_path(racks):
     orderobj = list(map(Location, racks))
     a = greedy(thea2, orderobj)
 
+    pickup_counter = 1
     result = []
     for point in a[0]:
         if type(point) is Location:
             temp = label_to_location_mapping[point.label]
             temp['isPickUp'] = True
+            temp['counter'] = pickup_counter
+            pickup_counter+=1
             result.append(temp)
         else:
             result.append({"x": point.x, "y": point.y, "isPickUp": False})
