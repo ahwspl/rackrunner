@@ -16,10 +16,10 @@ def generate_thea2():
     ext_y = 9
     x_unit = 3
     y_unit = 6
-    loc2x = 0
+    loc2x = 2
     pick_dist = 6
 
-    aisles = {'A': 40, 'B': 48, 'C': 48, 'D': 48, 'E': 48, 'F': 48, 'G': 48, 'H': 48, 'I': 50, 'R': 7}
+    aisles = {'A': 24, 'B': 48, 'C': 48, 'D': 48, 'E': 48, 'F': 48, 'G': 48, 'H': 48, 'I': 50, 'R': 7}
 
     locations = []
     for prefix in sorted(aisles):
@@ -54,15 +54,11 @@ def generate_thea2():
         x = number
         g.add_edge(make_loc('A', number), make_ext(x, 0), loc2x)
 
-    for number in range(13, 17):
-        x = number - 2
+    for number in range(13, 25):
+        x = number + 2
         g.add_edge(make_loc('A', number), make_ext(x, 0), loc2x)
 
-    for number in range(18, 41, 2):
-        x = int(number / 2) + 6
-        g.add_edge(make_loc('A', number - 1), make_ext(x, 0), loc2x)
-        g.add_edge(make_loc('A', number), make_ext(x, 0), loc2x)
-
+    # Aisles B to H
     for aisle, y in zip(['B', 'C', 'D', 'E', 'F', 'G', 'H'], list(range(1, 8))):
         for number in range(2, 25, 2):
             x = int(number / 2)
@@ -89,13 +85,13 @@ def generate_thea2():
         g.add_edge(make_loc('I', number), make_ext(x, 8), loc2x)
 
     # Refrigerators
-    g.add_edge(make_loc('R', 1), make_ext(1, 0), loc2x)
-    g.add_edge(make_loc('R', 2), make_ext(2, 0), loc2x)
-    g.add_edge(make_loc('R', 3), make_ext(4, 0), loc2x)
-    g.add_edge(make_loc('R', 4), make_ext(5, 0), loc2x)
-    g.add_edge(make_loc('R', 5), make_ext(6, 0), loc2x)
-    g.add_edge(make_loc('R', 6), make_ext(7, 0), loc2x)
-    g.add_edge(make_loc('R', 7), make_ext(8, 0), loc2x)
+    g.add_edge(make_loc('R', 1), make_ext(15, 0), loc2x)
+    g.add_edge(make_loc('R', 2), make_ext(16, 0), loc2x)
+    g.add_edge(make_loc('R', 3), make_ext(17, 0), loc2x)
+    g.add_edge(make_loc('R', 4), make_ext(18, 0), loc2x)
+    g.add_edge(make_loc('R', 5), make_ext(19, 0), loc2x)
+    g.add_edge(make_loc('R', 6), make_ext(20, 0), loc2x)
+    g.add_edge(make_loc('R', 7), make_ext(21, 0), loc2x)
 
     return g
 
