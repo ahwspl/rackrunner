@@ -12,6 +12,9 @@ class PathUtil:
         q = Queue()
         q.put(src)
 
+        numrows = len(input)
+        numcols = len(input[0])
+
         while
 
 
