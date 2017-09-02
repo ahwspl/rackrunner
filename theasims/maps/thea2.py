@@ -93,6 +93,8 @@ def generate_thea2():
     g.add_edge(make_loc('R', 6), make_ext(20, 0), loc2x)
     g.add_edge(make_loc('R', 7), make_ext(21, 0), loc2x)
 
+    g.set_parameter(ext_x, ext_y)
+
     return g
 
 thea2 = generate_thea2()

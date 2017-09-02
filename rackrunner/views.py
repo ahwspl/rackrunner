@@ -9,6 +9,5 @@ class RackerView(viewsets.ViewSet):
     authentication_classes = ()
 
     def getWarehousePath(self, request):
-        rack_ids = request.GET['racks']
-        print(rack_ids)
+        rack_ids = request.GET.get('racks',[])
         return Response({'msg':'Request successfully queued'})

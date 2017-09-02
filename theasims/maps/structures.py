@@ -75,3 +75,7 @@ class Graph(object):
 
     def print(self):
         print(self.adjList)
+
+    def set_parameter(self, width, length):
+        self.width = width
+        self.length = length
