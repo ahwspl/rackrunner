@@ -118,33 +118,12 @@ def brute_force(graph, ordlocs, limit=-1, maxlimct=3):
         return None, None
 
 
-# Example Strategies
+# Combined Strategy
 
-def brute_greedy(graph, ordlocs):
+def greedy_lex(graph, ordlocs):
     greedy_path, greedy_dist = greedy(graph, ordlocs)
-    brute_path, brute_dist = brute_force(graph, ordlocs, greedy_dist)
-    if brute_path is None:
-        print("Warn: Brute -> Greedy")
+    lex_path, lex_dist = lexicographic(graph, ordlocs)
+    if greedy_dist < lex_dist:
         return greedy_path, greedy_dist
-    return brute_path, brute_dist
-
-
-def brute_5(graph, ordlocs):
-    if len(ordlocs) <= 5:
-        return brute_greedy(graph, ordlocs)
     else:
-        return greedy(graph, ordlocs)
-
-
-def brute_9(graph, ordlocs):
-    if len(ordlocs) <= 9:
-        return brute_greedy(graph, ordlocs)
-    else:
-        return greedy(graph, ordlocs)
-
-
-def brute_14(graph, ordlocs):
-    if len(ordlocs) <= 14:
-        return brute_greedy(graph, ordlocs)
-    else:
-        return greedy(graph, ordlocs)
+        return lex_path, lex_dist
