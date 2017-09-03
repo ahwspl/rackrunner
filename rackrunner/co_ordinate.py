@@ -1,16 +1,14 @@
-from theasims.algos import dsa
+from theasims.algos.dsa import flatmap
 from theasims.maps.thea2 import thea2
-
-# getpath import
 from theasims.maps.structures import Location
-from theasims.algos.traverse import greedy
+from theasims.algos.traverse import greedy_lex as getpath
 
 
 def get_coordinate():
-    flatmap_of_list = (dsa.flatmap(thea2.get_neighbors, thea2.locations))
-    flatmap_of_list = [dict(zip(('x', 'y'), (i.x, i.y))) for i in flatmap_of_list]
+    flatmap_of_list = flatmap(thea2.get_neighbors, thea2.locations)
+    coords = [dict(zip(('x', 'y'), (i.x, i.y))) for i in flatmap_of_list]
     map_location = [i.label for i in thea2.locations]
-    return dict(zip(map_location, flatmap_of_list))
+    return dict(zip(map_location, coords))
 
 
 def get_boundary():
@@ -23,13 +21,11 @@ def get_boundary():
 def get_path(racks):
     if racks is None or len(racks) == 0:
         return []
-    flatmap_of_list = (dsa.flatmap(thea2.get_neighbors, thea2.locations))
-    flatmap_of_list = [dict(zip(('x', 'y'), (i.x, i.y))) for i in flatmap_of_list]
-    map_location = [i.label for i in thea2.locations]
-    label_to_location_mapping = dict(zip(map_location, flatmap_of_list))
+
+    label_to_location_mapping = get_coordinate()
 
     orderobj = list(map(Location, racks))
-    a = greedy(thea2, orderobj)
+    path, distance = getpath(thea2, orderobj)
 
     pickup_counter = 1
     result = []
@@ -40,7 +36,7 @@ def get_path(racks):
     delta_x = 0
     delta_y = 0
 
-    for point in a[0]:
+    for point in path:
         if type(point) is Location:
             temp = label_to_location_mapping[point.label]
             temp['isPickUp'] = True
@@ -50,7 +46,6 @@ def get_path(racks):
             pre_x = temp['x']
             pre_y = temp['y']
         else:
-
             if pre_x is not None:
                 if pre_x > point.x:
                     delta_x = 0
